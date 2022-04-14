@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent, useEffect, useState } from "react";
+import React, { Fragment, FunctionComponent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import useInput from "../../hooks/use-input";
@@ -13,7 +13,6 @@ interface NoteFormProps {
 }
 
 const NoteForm: FunctionComponent<NoteFormProps> = (props) => {
-  //const [note, setNote] = useState<Note|undefined>(props.note);
   const note = props.note;
   const userLevel = useSelector((state: RootState) => state.notes.userLevel);
   const [isFormValid, setIsFormValid] = useState<boolean>(true);
@@ -22,93 +21,43 @@ const NoteForm: FunctionComponent<NoteFormProps> = (props) => {
   const [situationInput, stuationChangeHandler] = useInput(
     note === undefined ? "" : note.situation
   );
-  const [ideaInput, setIdeaInput] = useState<string>(
+  const [ideaInput, ideaChangeHandler] = useInput(
     note === undefined ? "" : note.idea
   );
-  const [emotionInput, setEmotionInput] = useState<string>(
+  const [emotionInput, emotionChangeHandler] = useInput(
     note === undefined ? "" : note.emotion
   );
-  const [behaviourInput, setBehaviourInput] = useState<string>(
+  const [behaviourInput, behaviourChangeHandler] = useInput(
     note === undefined ? "" : note.behaviour
   );
-  const [wrongThinkingInput, setWrongThinkingInput] = useState<string>(
+  const [wrongThinkingInput, wrongThinkingChangeHandler] = useInput(
     note === undefined ? "" : note.wrongThinking
   );
-  const [ceontInput, setCeontInput] = useState<string>(
+  const [ceontInput, ceontChangeHandler] = useInput(
     note === undefined ? "" : note.ceont
   );
-  const [ceontPInput, setCeontPInput] = useState<string>(
+  const [ceontPInput, ceontPChangeHandler] = useInput(
     note === undefined ? "" : note.ceontP
   );
-  const [congitiveContinumInput, setCongitiveContinumInput] = useState<number>(
+  const [congitiveContinumInput, cognitiveContinuumChangeHandler] = useInput(
     note === undefined ? 0 : note.cognitiveContinuum
   );
-  const [alternativeThoughtInput, setAlternativeThoughtInput] =
-    useState<string>(note === undefined ? "" : note.alternativeThought);
-  const [newEmotionInput, setNewEmotionInput] = useState<string>(
+  const [alternativeThoughtInput, alternativeThoughtChangeHandler] = useInput(
+    note === undefined ? "" : note.alternativeThought
+  );
+  const [newEmotionInput, newEmotionChangeHandler] = useInput(
     note === undefined ? "" : note.newEmotion
   );
-  const [newBehaviourInput, setNewBehaviourInput] = useState<string>(
+  const [newBehaviourInput, newBehaviourChangeHandler] = useInput(
     note === undefined ? "" : note.newBehaviour
   );
-  const [degreeOfBeliefInput, setDegreeOfBeliefInput] = useState<number>(
+  const [degreeOfBeliefInput, degreeOfBeliefChangeHandler] = useInput(
     note === undefined ? 0 : note.degreeOfBelief
   );
-  const [degreeOfExcutionInput, setDegreeOfExcutionInput] = useState<number>(
+  const [degreeOfExcutionInput, degreeOfExcutionChangeHandler] = useInput(
     note === undefined ? 0 : note.degreeOfExcution
   );
-  const ideaChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIdeaInput(event.target.value);
-  };
-  const emotionChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmotionInput(event.target.value);
-  };
-  const behaviourChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setBehaviourInput(event.target.value);
-  };
-  const wrongThinkingChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setWrongThinkingInput(event.target.value);
-  };
-  const ceontChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCeontInput(event.target.value);
-  };
-  const ceontPChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCeontPInput(event.target.value);
-  };
-  const cognitiveContinuumChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setCongitiveContinumInput(+event.target.value);
-  };
-  const alternativeThoughtChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setAlternativeThoughtInput(event.target.value);
-  };
-  const newEmotionChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setNewEmotionInput(event.target.value);
-  };
-  const newBehaviourChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setNewBehaviourInput(event.target.value);
-  };
-  const degreeOfBeliefChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setDegreeOfBeliefInput(+event.target.value);
-  };
-  const degreeOfExcutionChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setDegreeOfExcutionInput(+event.target.value);
-  };
+
   const formSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
     if (situationInput.length === 0) {
